@@ -2467,7 +2467,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
     //
 
     if ((attr = ippFindAttribute(supported, "print-content-optimize-default",
-				 IPP_TAG_ZERO)) != NULL)
+				 IPP_TAG_ZERO)) != NULL &&
+	(ippGetValueTag(attr) == IPP_TAG_NAME ||
+	 ippGetValueTag(attr) == IPP_TAG_NAMELANG ||
+	 ippGetValueTag(attr) == IPP_TAG_KEYWORD))
       strlcpy(ppdname, ippGetString(attr, 0, NULL), sizeof(ppdname));
     else
       strlcpy(ppdname, "auto", sizeof(ppdname));
@@ -2504,7 +2507,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
     //
 
     if ((attr = ippFindAttribute(supported, "print-rendering-intent-default",
-				 IPP_TAG_ZERO)) != NULL)
+				 IPP_TAG_ZERO)) != NULL &&
+	(ippGetValueTag(attr) == IPP_TAG_NAME ||
+	 ippGetValueTag(attr) == IPP_TAG_NAMELANG ||
+	 ippGetValueTag(attr) == IPP_TAG_KEYWORD))
       strlcpy(ppdname, ippGetString(attr, 0, NULL), sizeof(ppdname));
     else
       strlcpy(ppdname, "auto", sizeof(ppdname));
@@ -2544,7 +2550,10 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
     //
 
     if ((attr = ippFindAttribute(supported, "print-scaling-default",
-				 IPP_TAG_ZERO)) != NULL)
+				 IPP_TAG_ZERO)) != NULL &&
+	(ippGetValueTag(attr) == IPP_TAG_NAME ||
+	 ippGetValueTag(attr) == IPP_TAG_NAMELANG ||
+	 ippGetValueTag(attr) == IPP_TAG_KEYWORD))
       strlcpy(ppdname, ippGetString(attr, 0, NULL), sizeof(ppdname));
     else
       strlcpy(ppdname, "auto", sizeof(ppdname));
