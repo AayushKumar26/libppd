@@ -419,8 +419,11 @@ ppdCreatePPDFromIPP2(char         *buffer,          // I - Filename buffer
   cupsFilePrintf(fp, "*ShortNickName: \"%s %s\"\n", make, model);
 
   // Which is the default output bin?
-  if ((attr = ippFindAttribute(supported, "output-bin-default", IPP_TAG_ZERO))
-      != NULL)
+  if ((attr = ippFindAttribute(supported, "output-bin-default",
+			       IPP_TAG_ZERO)) != NULL &&
+      (ippGetValueTag(attr) == IPP_TAG_NAME ||
+       ippGetValueTag(attr) == IPP_TAG_NAMELANG ||
+       ippGetValueTag(attr) == IPP_TAG_KEYWORD))
     defaultoutbin = strdup(ippGetString(attr, 0, NULL));
   // Find out on which position of the list of output bins the default one is,
   // if there is no default bin, take the first of this list
